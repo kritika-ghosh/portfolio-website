@@ -1,0 +1,358 @@
+/* ============================================================
+   KRI // VIRTUAL_IDENTITY — Stylesheet
+   ============================================================ */
+
+@view-transition { navigation: auto; }
+
+/* ============================================================
+   DESIGN TOKENS
+============================================================ */
+:root {
+    --neon-purple:  #a855f7;
+    --neon-magenta: #d946ef;
+    --neon-blue:    #00F3FF;
+    --bg-deep:      #05010d;
+    --transition-fast:   0.15s ease-out;
+    --transition-medium: 0.3s ease;
+    --transition-slow:   0.7s ease;
+}
+
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: var(--bg-deep);
+    color: #f5f3ff;
+    margin: 0;
+    overflow-x: hidden;
+    cursor: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Restore cursor on touch devices */
+@media (hover: none) {
+    body { cursor: auto; }
+    #custom-cursor,
+    #cursor-follower { display: none; }
+}
+
+/* ============================================================
+   TYPOGRAPHY
+============================================================ */
+.mono-font {
+    font-family: 'Azeret Mono', monospace;
+}
+
+/* ============================================================
+   NEON TEXT GLOWS
+============================================================ */
+.neon-text-purple {
+    color: #fff;
+    text-shadow:
+        0 0 10px var(--neon-purple),
+        0 0 20px var(--neon-purple);
+}
+
+.neon-text-magenta {
+    color: #fff;
+    text-shadow:
+        0 0 10px var(--neon-magenta),
+        0 0 20px var(--neon-magenta);
+}
+
+.neon-text-blue {
+    color: #fff;
+    text-shadow:
+        0 0 10px var(--neon-blue),
+        0 0 20px var(--neon-blue);
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+============================================================ */
+#custom-cursor {
+    width: 10px;
+    height: 10px;
+    background: var(--neon-blue);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate3d(-100px, -100px, 0);
+    transition:
+        width var(--transition-medium),
+        height var(--transition-medium),
+        mix-blend-mode var(--transition-medium);
+    box-shadow: 0 0 15px var(--neon-blue);
+    will-change: transform;
+}
+
+#cursor-follower {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--neon-purple);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate3d(-100px, -100px, 0);
+    transition:
+        border-color var(--transition-medium),
+        width var(--transition-medium),
+        height var(--transition-medium);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+    will-change: transform;
+}
+
+/* ============================================================
+   FLOATING ORBS
+============================================================ */
+.orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* ============================================================
+   BACKGROUND
+============================================================ */
+.bg-grid {
+    background-image:
+        linear-gradient(rgba(168, 85, 247, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168, 85, 247, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+/* ============================================================
+   SCANLINES
+============================================================ */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        transparent 50%,
+        rgba(168, 85, 247, 0.03) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.5;
+}
+
+/* ============================================================
+   3D TILT CARDS
+============================================================ */
+.tilt-card-container {
+    perspective: 1200px;
+}
+
+.tilt-card {
+    transform-style: preserve-3d;
+    transition:
+        transform 0.1s ease-out,
+        border-color var(--transition-medium),
+        box-shadow var(--transition-medium);
+    background: rgba(15, 5, 30, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.tilt-card:hover {
+    border-color: var(--neon-magenta);
+    box-shadow: 0 0 30px rgba(217, 70, 239, 0.3);
+}
+
+/* ============================================================
+   CYBER BUTTONS
+============================================================ */
+.cyber-btn {
+    display: inline-block;
+    background: transparent;
+    color: #fff;
+    border: 1px solid var(--neon-purple);
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-medium);
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+    cursor: none;
+}
+
+.cyber-btn:hover {
+    background: var(--neon-purple);
+    color: #000;
+    box-shadow: 0 0 30px var(--neon-purple);
+    transform: translateY(-2px);
+}
+
+.cyber-btn.blue {
+    border-color: var(--neon-blue);
+    color: #fff;
+}
+
+.cyber-btn.blue:hover {
+    background: var(--neon-blue);
+    color: #000;
+    box-shadow: 0 0 30px var(--neon-blue);
+}
+
+/* ============================================================
+   GLITCH TEXT EFFECT
+============================================================ */
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.glitch-text:hover::before {
+    opacity: 0.8;
+    animation: glitch-anim 0.4s infinite linear alternate-reverse;
+    color: var(--neon-blue);
+    z-index: -1;
+    transform: translateX(-2px);
+}
+
+.glitch-text:hover::after {
+    opacity: 0.8;
+    animation: glitch-anim 0.4s infinite linear alternate-reverse;
+    color: var(--neon-magenta);
+    z-index: -2;
+    transform: translateX(2px);
+}
+
+@keyframes glitch-anim {
+    0%   { clip: rect(10px, 9999px, 30px, 0); }
+    25%  { clip: rect(55px, 9999px, 70px, 0); }
+    50%  { clip: rect(20px, 9999px, 50px, 0); }
+    75%  { clip: rect(80px, 9999px, 95px, 0); }
+    100% { clip: rect(70px, 9999px, 100px, 0); }
+}
+
+/* ============================================================
+   ELECTRIC ACCENT LINE
+============================================================ */
+.electric-accent {
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--neon-blue),
+        transparent
+    );
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* ============================================================
+   HERO CONTENT — fade-in on load
+============================================================ */
+.hero-content {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   TECH TILE — subtle scale on hover
+============================================================ */
+.tech-tile {
+    cursor: default;
+    transition:
+        background-color var(--transition-medium),
+        transform var(--transition-medium);
+}
+
+.tech-tile:hover {
+    transform: translateY(-4px);
+}
+
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--neon-purple);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-magenta);
+}
+
+/* ============================================================
+   SELECTION HIGHLIGHT
+============================================================ */
+::selection {
+    background: var(--neon-purple);
+    color: #fff;
+}
+
+/* ============================================================
+   FOCUS VISIBLE (Accessibility)
+============================================================ */
+:focus-visible {
+    outline: 2px solid var(--neon-purple);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   RESPONSIVE TWEAKS
+============================================================ */
+@media (max-width: 768px) {
+    .cyber-btn {
+        padding: 0.75rem 1.75rem;
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Kritika Ghosh — Computer Science student at VIT Bhopal specializing in Multi-Modal AI, Computational Chemistry Automation, and Python Development.">
+    <meta name="theme-color" content="#05010d">
+    <title>Kritika Ghosh // VIRTUAL_IDENTITY</title>
+
+    <!-- External Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=space-grotesk@300,400,500,600,700&f[]=azeret-mono@100,200,300,400,500&display=swap"
+        rel="stylesheet">
+
+    <!-- Variable Font: Roboto Flex (supports wght, wdth, ital axes) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- TextPressure Styles -->
+    <style id="text-pressure-styles">
+        #text-pressure {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: baseline;
+            line-height: 0.9;
+            gap: 0;
+            font-family: 'Roboto Flex', sans-serif;
+            font-size: clamp(1rem, 15vw, 9rem);
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            color: #fff;
+            text-shadow:
+                0 0 10px rgba(168, 85, 247, 0.6),
+                0 0 30px rgba(168, 85, 247, 0.3);
+            will-change: contents;
+            user-select: none;
+        }
+
+        .pressure-char {
+            display: inline-block;
+            /* resting state: semi-bold, normal width */
+            font-variation-settings: 'wght' 200, 'wdth' 80, 'ital' 0;
+            will-change: font-variation-settings;
+            white-space: pre;
+            transition: color 0.08s ease, text-shadow 0.08s ease;
+        }
+
+        /* Space character */
+        .pressure-char-space {
+            display: inline-block;
+            width: 0.25em;
+        }
+    </style>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        magenta: {
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Overlay Effects -->
+    <div class="scanlines" aria-hidden="true"></div>
+    <div id="custom-cursor" aria-hidden="true"></div>
+    <div id="cursor-follower" aria-hidden="true"></div>
+
+    <!-- Floating Parallax Orbs -->
+    <div class="orb w-[500px] h-[500px] bg-purple-600 top-[-10%] left-[-10%]" id="orb-1" aria-hidden="true"></div>
+    <div class="orb w-[400px] h-[400px] bg-purple-800 bottom-[-10%] right-[-10%]" id="orb-2" aria-hidden="true"></div>
+    <div class="orb w-[300px] h-[300px] bg-blue-600 top-[40%] right-[10%] opacity-10" id="orb-3" aria-hidden="true">
+    </div>
+
+    <div class="min-h-screen relative z-10 bg-grid">
+
+        <!-- ============================================================
+             NAVIGATION
+        ============================================================ -->
+        <nav class="fixed top-0 left-0 w-full z-50 px-10 h-24 bg-[#05010d]/90 border-b border-purple-900/50 flex justify-between items-center backdrop-blur-sm"
+            role="navigation" aria-label="Main Navigation">
+            <div class="mono-font text-xl font-bold tracking-tighter text-white">
+                KRITIKA // <span class="text-magenta-500">GH05H</span>
+            </div>
+            <div class="hidden md:flex items-center gap-10 mono-font text-xs uppercase tracking-widest font-medium">
+                <a href="#identity" id="nav-identity-link"
+                    class="hover:text-magenta-400 transition-colors duration-200">Experience</a>
+                <a href="#matrix" id="nav-matrix-link"
+                    class="hover:text-magenta-400 transition-colors duration-200">Tech Stack</a>
+                <a href="#forge" id="nav-forge-link"
+                    class="hover:text-magenta-400 transition-colors duration-200">Projects</a>
+                <a href="#contact" id="nav-contact-link"
+                    class="px-6 py-2 border border-magenta-500/50 hover:bg-magenta-500 hover:text-white transition-all duration-300">Reach
+                    Out</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-purple-400 hover:text-white transition-colors p-2"
+                aria-label="Toggle mobile menu" aria-expanded="false">
+                <iconify-icon icon="lucide:menu" class="text-2xl"></iconify-icon>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="fixed top-24 left-0 w-full z-40 hidden bg-[#05010d]/95 border-b border-purple-900/50 backdrop-blur-xl py-6 px-10"
+            role="navigation" aria-label="Mobile Navigation">
+            <div class="flex flex-col gap-6 mono-font text-sm uppercase tracking-widest font-medium">
+                <a href="#identity"
+                    class="hover:text-magenta-400 transition-colors duration-200 mobile-nav-link">Identity</a>
+                <a href="#matrix"
+                    class="hover:text-magenta-400 transition-colors duration-200 mobile-nav-link">Matrix</a>
+                <a href="#forge" class="hover:text-magenta-400 transition-colors duration-200 mobile-nav-link">Forge</a>
+                <a href="#contact" class="hover:text-magenta-400 transition-colors duration-200 mobile-nav-link">Reach
+                    Out</a>
+            </div>
+        </div>
+
+        <!-- ============================================================
+             HERO SECTION
+        ============================================================ -->
+        <section id="hero"
+            class="h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden">
+            <!-- Background watermark -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl opacity-[0.03] pointer-events-none select-none"
+                aria-hidden="true">
+                <span class="text-[25rem] font-black italic uppercase leading-none"></span>
+            </div>
+
+            <div class="relative space-y-8 hero-content">
+                <div class="mono-font text-magenta-500 tracking-[0.4em] mb-4 text-sm animate-pulse" aria-live="polite">
+                    STUDENT // VIT_BHOPAL // GPA_9.4
+                </div>
+
+                <h1 class="leading-none">
+                    <div id="text-pressure" aria-label="KRITIKA GHOSH" role="heading" aria-level="1">KRITIKA GHOSH</div>
+                </h1>
+
+                <div class="max-w-2xl mx-auto space-y-10">
+                    <div class="electric-accent w-24 mx-auto mb-8"></div>
+                    <p class="text-lg md:text-xl text-purple-100/70 mono-font leading-relaxed">
+                        Third year CS student specializing in
+                        <span class="text-magenta-400 font-semibold">Artificial Intelligence</span>,
+                        <span class="text-blue-400 font-semibold">Machine Learning</span>
+                        &amp; Python development. Building research-driven solutions for real-world problems.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="#forge" id="btn-explore" class="cyber-btn">Explore Forge</a>
+                        <a href="#identity" id="btn-intel" class="cyber-btn blue">Core Intel</a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#identity"
+                class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-purple-500 hover:text-magenta-400 transition-colors"
+                aria-label="Scroll to Identity section">
+                <iconify-icon icon="lucide:chevron-down" class="text-3xl"></iconify-icon>
+            </a>
+        </section>
+
+        <!-- ============================================================
+             IDENTITY / EXPERIENCE SECTION
+        ============================================================ -->
+        <section id="identity" class="py-32 px-10 max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-20 items-start">
+
+                <div class="space-y-12">
+                    <div>
+                        <span class="mono-font text-magenta-500 text-sm tracking-widest">// MISSION_PROFILE</span>
+                        <h2 class="text-5xl font-bold mt-2 italic neon-text-purple">IDENTITY</h2>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Experience Card 1 -->
+                        <div class="tilt-card-container group" role="article">
+                            <div class="tilt-card p-10 backdrop-blur-xl relative overflow-hidden rounded-lg">
+                                <div class="absolute top-0 right-0 w-20 h-20 border-t border-r border-magenta-500/20"
+                                    aria-hidden="true"></div>
+                                <div class="flex items-center gap-4 mb-6">
+                                    <span class="p-3 bg-magenta-500/10 text-magenta-400 rounded">
+                                        <iconify-icon icon="lucide:brain" class="text-2xl"
+                                            aria-hidden="true"></iconify-icon>
+                                    </span>
+                                    <h3 class="text-2xl font-bold">ML Intern — InternSpark</h3>
+                                </div>
+                                <p class="text-purple-200/60 leading-relaxed mb-6">
+                                    Selected for a machine learning internship focusing on data-driven modeling and
+                                    predictive analysis for organizational insights.
+                                </p>
+                                <div class="mono-font text-xs text-magenta-500 font-semibold tracking-widest uppercase">
+                                    [ NOV 2025 — ACTIVE_NODE ]
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Experience Card 2 -->
+                        <div class="tilt-card-container group" role="article">
+                            <div class="tilt-card p-10 backdrop-blur-xl relative overflow-hidden rounded-lg">
+                                <div class="absolute top-0 right-0 w-20 h-20 border-t border-r border-blue-500/20"
+                                    aria-hidden="true"></div>
+                                <div class="flex items-center gap-4 mb-6">
+                                    <span class="p-3 bg-blue-500/10 text-blue-400 rounded">
+                                        <iconify-icon icon="lucide:cpu" class="text-2xl"
+                                            aria-hidden="true"></iconify-icon>
+                                    </span>
+                                    <h3 class="text-2xl font-bold">Core Member — iCreate Workshop</h3>
+                                </div>
+                                <p class="text-purple-200/60 leading-relaxed mb-6">
+                                    Spearheaded IoT events &amp; workshops. Managed hardware logistics and technical
+                                    documentation for Arduino/ESP32 circuit prototyping sessions.
+                                </p>
+                                <div class="mono-font text-xs text-blue-500 font-semibold tracking-widest uppercase">
+                                    [ SEPT 2024 — ACTIVE_NODE ]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Holographic Visual Panel -->
+                <div class="relative h-[650px] hidden lg:block sticky top-32" aria-hidden="true">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-purple-900/10 border border-purple-500/10 rounded-2xl overflow-hidden backdrop-blur-3xl flex items-center justify-center">
+                        <!-- Spinning core rings -->
+                        <div
+                            class="w-64 h-64 border-2 border-magenta-500/30 rotate-45 animate-[spin_15s_linear_infinite] relative">
+                            <div
+                                class="absolute inset-4 border border-purple-500/30 -rotate-45 animate-[spin_8s_linear_infinite_reverse]">
+                            </div>
+                            <div
+                                class="absolute inset-10 border-4 border-blue-500/20 rotate-90 animate-pulse flex items-center justify-center">
+                                <iconify-icon icon="lucide:activity" class="text-5xl text-blue-400/50"></iconify-icon>
+                            </div>
+                        </div>
+                        <!-- Terminal readout -->
+                        <div class="absolute bottom-8 left-8 mono-font text-[10px] space-y-1 text-purple-400/50">
+                            <div>>> CI2A_CONF: RESEARCH_PRESENTED</div>
+                            <div class="text-blue-400">>> BURNOUT_DETECTION: 78%_ACC</div>
+                            <div>>> VIT_BHOPAL // GPA: 9.4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             TECH MATRIX SECTION
+        ============================================================ -->
+        <section id="matrix" class="py-32 relative">
+            <div class="max-w-7xl mx-auto px-10">
+                <div class="text-center mb-24">
+                    <h2 class="text-6xl font-black tracking-tighter italic neon-text-purple">TECH_STACK</h2>
+                    <p class="mono-font text-magenta-500 mt-4 tracking-[0.3em] uppercase font-semibold">System Core
+                        Modules</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-purple-500/10" role="list"
+                    aria-label="Technology Skills">
+                    <div class="tech-tile bg-[#0a0514] p-12 flex flex-col items-center gap-6 hover:bg-purple-900/20 transition-all group border border-purple-500/5"
+                        role="listitem">
+                        <iconify-icon icon="simple-icons:python"
+                            class="text-5xl text-purple-400 group-hover:text-magenta-400 group-hover:drop-shadow-[0_0_15px_var(--neon-magenta)] transition-all"
+                            aria-label="Python"></iconify-icon>
+                        <span class="mono-font text-xs uppercase tracking-widest text-white">Python</span>
+                    </div>
+                    <div class="tech-tile bg-[#0a0514] p-12 flex flex-col items-center gap-6 hover:bg-purple-900/20 transition-all group border border-purple-500/5"
+                        role="listitem">
+                        <iconify-icon icon="simple-icons:scikitlearn"
+                            class="text-5xl text-purple-400 group-hover:text-magenta-400 group-hover:drop-shadow-[0_0_15px_var(--neon-magenta)] transition-all"
+                            aria-label="Scikit-learn / CatBoost"></iconify-icon>
+                        <span class="mono-font text-xs uppercase tracking-widest text-white">ML / Data</span>
+                    </div>
+                    <div class="tech-tile bg-[#0a0514] p-12 flex flex-col items-center gap-6 hover:bg-purple-900/20 transition-all group border border-purple-500/5"
+                        role="listitem">
+                        <iconify-icon icon="simple-icons:arduino"
+                            class="text-5xl text-purple-400 group-hover:text-magenta-400 group-hover:drop-shadow-[0_0_15px_var(--neon-magenta)] transition-all"
+                            aria-label="Arduino / IoT"></iconify-icon>
+                        <span class="mono-font text-xs uppercase tracking-widest text-white">IoT / HW</span>
+                    </div>
+                    <div class="tech-tile bg-[#0a0514] p-12 flex flex-col items-center gap-6 hover:bg-purple-900/20 transition-all group border border-purple-500/5"
+                        role="listitem">
+                        <iconify-icon icon="simple-icons:git"
+                            class="text-5xl text-purple-400 group-hover:text-magenta-400 group-hover:drop-shadow-[0_0_15px_var(--neon-magenta)] transition-all"
+                            aria-label="Git"></iconify-icon>
+                        <span class="mono-font text-xs uppercase tracking-widest text-white">Git</span>
+                    </div>
+                    <div class="tech-tile bg-[#0a0514] p-12 flex flex-col items-center gap-6 hover:bg-purple-900/20 transition-all group border border-purple-500/5"
+                        role="listitem">
+                        <iconify-icon icon="simple-icons:linux"
+                            class="text-5xl text-purple-400 group-hover:text-magenta-400 group-hover:drop-shadow-[0_0_15px_var(--neon-magenta)] transition-all"
+                            aria-label="Linux"></iconify-icon>
+                        <span class="mono-font text-xs uppercase tracking-widest text-white">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             CODE FORGE / PROJECTS SECTION
+        ============================================================ -->
+        <section id="forge" class="py-32 px-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex justify-between items-end mb-20">
+                    <h2 class="text-5xl font-black italic neon-text-magenta">CODE_FORGE</h2>
+                    <div class="mono-font text-blue-400 text-sm hidden md:block tracking-widest">// STATUS:
+                        COMPILED_STABLE</div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-10">
+                    <!-- Featured Project -->
+                    <a href="https://github.com/kritika-ghosh" id="proj-1"
+                        class="group relative block h-[550px] overflow-hidden rounded-2xl border border-purple-500/10 focus:outline-none focus:ring-2 focus:ring-magenta-500"
+                        aria-label="Mental Burnout Detection System">
+                        <div class="proj-placeholder absolute inset-0 w-full h-full">
+                            <div
+                                class="w-full h-full bg-gradient-to-br from-purple-900/40 via-[#0a0514] to-blue-900/20 flex items-center justify-center">
+                                <iconify-icon icon="lucide:brain"
+                                    class="text-8xl text-purple-500/30 group-hover:text-magenta-400/50 transition-all duration-700"></iconify-icon>
+                            </div>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#05010d] via-[#05010d]/40 to-transparent">
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-12 space-y-4">
+                            <div class="mono-font text-blue-400 text-xs font-bold tracking-widest">[ MULTI_MODAL //
+                                ML_ENGINE ]</div>
+                            <h3
+                                class="text-4xl font-bold italic text-white group-hover:text-magenta-400 transition-all duration-300">
+                                Burnout Detection</h3>
+                            <p class="text-purple-100/60 max-w-md">Multi-modal ML system integrating Facial Analysis
+                                (EAR/MAR), Voice Sentiment (VADER) &amp; survey data. 78% accuracy via CatBoost + SMOTE.
+                            </p>
+                            <div
+                                class="pt-4 flex items-center gap-4 text-magenta-400 font-bold uppercase text-xs tracking-[0.2em]">
+                                <span>Access Source</span>
+                                <iconify-icon icon="lucide:arrow-right"
+                                    class="group-hover:translate-x-2 transition-transform duration-300"></iconify-icon>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Side Projects -->
+                    <div class="space-y-10">
+                        <a href="https://github.com/kritika-ghosh" id="proj-2"
+                            class="group block p-10 bg-purple-900/5 border border-purple-500/10 rounded-2xl hover:border-blue-500/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            aria-label="GAMESS Input File Builder GUI">
+                            <div class="flex justify-between items-start mb-6">
+                                <iconify-icon icon="lucide:flask-conical" class="text-4xl text-blue-500"
+                                    aria-hidden="true"></iconify-icon>
+                                <iconify-icon icon="lucide:external-link"
+                                    class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-400"
+                                    aria-hidden="true"></iconify-icon>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">GAMESS GUI Builder</h3>
+                            <p class="text-purple-100/60 text-sm leading-relaxed mb-6">Python/CustomTkinter tool to
+                                automate GAMESS input file generation for computational chemistry workflows.</p>
+                            <div class="flex gap-3">
+                                <span
+                                    class="mono-font text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-1 rounded">PYTHON</span>
+                                <span
+                                    class="mono-font text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2 py-1 rounded">CHEM</span>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/kritika-ghosh" id="proj-3"
+                            class="group block p-10 bg-purple-900/5 border border-purple-500/10 rounded-2xl hover:border-magenta-500/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-magenta-500"
+                            aria-label="Obsidian PARA Automation Script">
+                            <div class="flex justify-between items-start mb-6">
+                                <iconify-icon icon="lucide:book-open" class="text-4xl text-magenta-500"
+                                    aria-hidden="true"></iconify-icon>
+                                <iconify-icon icon="lucide:external-link"
+                                    class="text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-purple-400"
+                                    aria-hidden="true"></iconify-icon>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Obsidian PARA Script</h3>
+                            <p class="text-purple-100/60 text-sm leading-relaxed mb-6">Automates digital knowledge
+                                management in Obsidian — parses Markdown, updates SUMMARY.MD, and handles bi-directional
+                                linking.</p>
+                            <div class="flex gap-3">
+                                <span
+                                    class="mono-font text-[10px] bg-magenta-500/10 text-magenta-400 border border-magenta-500/20 px-2 py-1 rounded">PYTHON</span>
+                                <span
+                                    class="mono-font text-[10px] bg-magenta-500/10 text-magenta-400 border border-magenta-500/20 px-2 py-1 rounded">AUTOMATION</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </section>
+
+        <!-- ============================================================
+             CONTACT SECTION
+        ============================================================ -->
+        <section id="contact" class="py-40 text-center px-10 relative">
+            <div class="max-w-4xl mx-auto space-y-12">
+                <h2 class="text-7xl font-black italic tracking-tighter neon-text-purple">Reach Out</h2>
+                <p class="text-xl text-purple-100/50 max-w-xl mx-auto mono-font uppercase tracking-widest">
+                    Direct data transmission port open for professional initialization.
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://mail.google.com/mail/?view=cm&to=kri.kritika.ghosh@gmail.com" id="cta-btn"
+                        target="_blank" rel="noopener noreferrer"
+                        class="group relative inline-flex items-center gap-6 px-12 py-6 bg-transparent border border-magenta-500 text-magenta-500 font-bold tracking-[0.3em] uppercase transition-all duration-300 hover:bg-magenta-500 hover:text-white hover:shadow-[0_0_40px_rgba(217,70,239,0.5)]">
+                        Transmit Signal
+                        <iconify-icon icon="lucide:send"
+                            class="group-hover:translate-x-2 transition-transform duration-300"
+                            aria-hidden="true"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             FOOTER
+        ============================================================ -->
+        <footer class="py-16 px-10 border-t border-purple-900/20" role="contentinfo">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+                <div class="mono-font text-xs text-purple-500/50 tracking-widest uppercase">
+                    [C] 2024 SYSTEM_KRI // ALL_OPERATIONS_RESERVED
+                </div>
+                <div class="flex gap-12">
+                    <a href="https://github.com/kritika-ghosh" id="footer-gh"
+                        class="text-2xl text-purple-400/50 hover:text-white transition-colors duration-200"
+                        aria-label="GitHub">
+                        <iconify-icon icon="simple-icons:github"></iconify-icon>
+                    </a>
+                    <a href="https://linkedin.com/in/kritika-ghosh-171433313" id="footer-li"
+                        class="text-2xl text-purple-400/50 hover:text-white transition-colors duration-200"
+                        aria-label="LinkedIn">
+                        <iconify-icon icon="simple-icons:linkedin"></iconify-icon>
+                    </a>
+                </div>
+                <div class="mono-font text-[10px] text-magenta-500 tracking-widest uppercase">
+                    LAT: 23.2599 // LON: 77.4126
+                </div>
+            </div>
+        </footer>
+
+    </div><!-- /.min-h-screen -->
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
