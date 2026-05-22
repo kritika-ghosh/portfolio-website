@@ -1,0 +1,25 @@
+.galaxy-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  /* Deep space base — multiple nebula gradients layered */
+  background:
+    radial-gradient(ellipse at 20% 25%,  rgba(50,  10, 140, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 70%,  rgba(8,   55, 160, 0.28) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 10%,  rgba(0,   90, 130, 0.20) 0%, transparent 40%),
+    radial-gradient(ellipse at 30% 85%,  rgba(70,   0, 100, 0.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 88% 28%,  rgba(10,  80, 120, 0.16) 0%, transparent 38%),
+    radial-gradient(ellipse at center,   #0b1220       0%,
+                                         #060c18      45%,
+                                         #020509      75%,
+                                         #000000     100%);
+  pointer-events: none;
+}
+
+.galaxy-stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Static — no stars to twinkle; nebula stays fixed */
+}
